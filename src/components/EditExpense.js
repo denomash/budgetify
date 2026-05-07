@@ -32,9 +32,14 @@ const EditExpense = () => {
 
       <div className="content-container">
         <ExpenseForm expense={expense} onSubmit={onEditExpense} />
-        <button className="button--secondary" onClick={onRemoveExpense}>
-          Remove Expense
-        </button>
+        <div style={{ marginTop: '1.6rem' }}>
+          <button
+            className="button button--danger"
+            onClick={onRemoveExpense}
+          >
+            Remove Expense
+          </button>
+        </div>
       </div>
     </div>
   );

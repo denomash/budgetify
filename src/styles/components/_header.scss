@@ -1,18 +1,48 @@
 .header {
-  background: $dark-blue;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+
+  [data-theme='dark'] & {
+    background: rgba(11, 16, 32, 0.7);
+  }
 
   &__content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $s-size 0;
+    padding: $m-size 0;
+    gap: $m-size;
   }
 
   &__title {
-    color: #fff;
+    color: var(--text);
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover {
+      color: var(--text);
+    }
+
     h1 {
       margin: 0;
+      font-size: $font-size-xl;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--success));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $s-size;
   }
 }

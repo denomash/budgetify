@@ -1,18 +1,28 @@
 .page-header {
-  background: $off-white;
-  padding: $l-size 0;
+  padding: $xl-size 0 $l-size;
   margin-bottom: $l-size;
-
-  &__actions {
-    margin-top: $m-size;
-  }
 
   &__title {
     margin: 0;
     font-weight: 300;
+    font-size: $font-size-xl;
+    color: var(--text-muted);
+    letter-spacing: -0.01em;
+
+    @media (min-width: $desktop-breakpoint) {
+      font-size: $font-size-2xl;
+    }
 
     span {
       font-weight: 700;
+      color: var(--text);
     }
+  }
+
+  &__actions {
+    margin-top: $m-size;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $s-size;
   }
 }

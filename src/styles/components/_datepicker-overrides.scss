@@ -1,0 +1,122 @@
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  height: 4.4rem;
+  padding: 0 $m-size;
+  font-family: inherit;
+  font-size: $font-size-md;
+  color: var(--text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: var(--text-subtle);
+  }
+
+  &:hover {
+    border-color: var(--border-strong);
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+}
+
+.react-datepicker {
+  font-family: $font-stack;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  color: var(--text);
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+
+.react-datepicker__header {
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  padding-top: $s-size + 0.4rem;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  color: var(--text);
+}
+
+.react-datepicker__day-name {
+  color: var(--text-muted);
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.react-datepicker__day {
+  border-radius: var(--radius-sm);
+  transition: background 0.1s ease, color 0.1s ease;
+
+  &:hover {
+    background: var(--surface-3);
+  }
+
+  &--selected,
+  &--in-selecting-range,
+  &--in-range {
+    background: var(--accent);
+    color: var(--accent-fg);
+
+    &:hover {
+      background: var(--accent-hover);
+    }
+  }
+
+  &--keyboard-selected {
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+
+  &--today {
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  &--outside-month {
+    color: var(--text-subtle);
+  }
+
+  &--disabled {
+    color: var(--text-subtle);
+    opacity: 0.5;
+  }
+}
+
+.react-datepicker__close-icon::after {
+  background: var(--text-subtle);
+  color: var(--bg-elevated);
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--text-muted);
+}
+
+.react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
+  border-color: var(--accent);
+}

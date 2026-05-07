@@ -2,45 +2,69 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.2)
-    ),
-    url('/images/new york.jpg');
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+  padding: $l-size $m-size;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(at 25% 25%, var(--accent-soft) 0%, transparent 55%),
+      radial-gradient(at 75% 75%, rgba(16, 185, 129, 0.08) 0%, transparent 55%);
+    pointer-events: none;
+  }
 
   &__box {
-    background: fade-out(#fff, 0.1);
-    border-radius: 3px;
-    box-shadow: 0 3px 6px rgba(45, 45, 45, 0.2);
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     text-align: center;
-    width: 62rem;
-    padding: $l-size $m-size;
+    width: 100%;
+    max-width: 44rem;
+    padding: $xl-size $l-size;
   }
 
   &__title {
-    margin: 0 0 2.6rem 0;
-    line-height: 1;
+    margin: 0 0 $s-size 0;
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--accent), var(--success));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   &__center {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: $l-size;
   }
 
   &__content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    width: 90%;
+    gap: $l-size;
+    width: 100%;
+
+    p {
+      color: var(--text-muted);
+      margin: 0;
+    }
   }
 
   &__divider {
-    width: 2px;
-    background: #b9b9b9;
-    height: 170px;
+    width: 100%;
+    max-width: 24rem;
+    height: 1px;
+    background: var(--border);
   }
 }

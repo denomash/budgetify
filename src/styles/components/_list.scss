@@ -1,75 +1,87 @@
 .list-header {
-  background: $off-white;
-  border: 1px solid darken($off-white, 7%);
-  color: $grey;
+  background: var(--surface-2);
+  color: var(--text-muted);
   display: flex;
   justify-content: space-between;
-  padding: $s-size $m-size;
+  padding: 1rem $m-size;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .list-body {
-  margin-bottom: $s-size;
-
-  @media (min-width: $desktop-breakpoint) {
-    margin-bottom: $l-size;
-  }
+  margin-bottom: $l-size;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 .list-item {
   display: flex;
   flex-direction: column;
-  border: 1px solid
-    darken(
-      $color: (
-        $off-white
-      ),
-      $amount: 7%
-    );
-  border-top: none;
-  color: $dark-grey;
-  padding: $s-size;
+  gap: $xs-size;
+  color: var(--text);
   text-decoration: none;
-  transition: background 0.3s ease;
+  padding: $m-size;
+  transition: background 0.15s ease;
+  position: relative;
+
+  & + & {
+    border-top: 1px solid var(--border);
+  }
 
   &:hover {
-    background: $off-white;
+    background: var(--surface-2);
+    color: var(--text);
   }
 
   @media (min-width: $desktop-breakpoint) {
-    align-items: center;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
-    padding: $m-size;
+    gap: $m-size;
   }
 
   &--message {
-    @extend .list-item;
     align-items: center;
     justify-content: center;
-    color: $grey;
-    padding: $m-size;
+    color: var(--text-muted);
+    padding: $l-size $m-size;
+    text-align: center;
 
     &:hover {
-      background: none;
+      background: transparent;
+      color: var(--text-muted);
     }
   }
 
   &__title {
     margin: 0;
-    word-break: break-all;
+    font-size: $font-size-md;
+    font-weight: 600;
+    word-break: break-word;
   }
 
   &__sub-title {
-    color: $grey;
-    font-size: $font-size-small;
+    color: var(--text-muted);
+    font-size: $font-size-sm;
   }
 
   &__data {
-    margin: $s-size 0 0 0;
+    margin: 0;
+    font-size: $font-size-md;
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
 
     @media (min-width: $desktop-breakpoint) {
-      margin: 0;
-      padding: $s-size;
+      font-size: $font-size-lg;
     }
   }
 }

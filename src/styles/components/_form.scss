@@ -1,12 +1,25 @@
 .form {
   display: flex;
   flex-direction: column;
+  gap: $m-size;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: $l-size;
+  box-shadow: var(--shadow-sm);
+
   > * {
-    margin-bottom: $m-size;
+    margin-bottom: 0;
   }
 
   &__error {
-    margin: 0 0 $m-size 0;
-    font-style: italic;
+    margin: 0;
+    padding: $s-size + 0.4rem $m-size;
+    background: var(--danger-soft);
+    color: var(--danger);
+    border-radius: var(--radius-sm);
+    font-size: $font-size-sm;
+    font-weight: 500;
+    font-style: normal;
   }
 }

@@ -1,24 +1,21 @@
 .input-group {
   display: flex;
   flex-direction: column;
+  gap: $s-size + 0.4rem;
   margin-bottom: $l-size;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: $m-size;
+  box-shadow: var(--shadow-sm);
 
   @media (min-width: $desktop-breakpoint) {
-    display: flex;
     flex-direction: row;
+    align-items: stretch;
   }
 
   &__item {
-    margin-bottom: $s-size;
-
-    &:not(lastchild) {
-      margin-right: $s-size;
-    }
-
-    @media (min-width: $desktop-breakpoint) {
-      &:not(lastchild) {
-        margin: 0 $s-size 0 0;
-      }
-    }
+    flex: 1;
+    min-width: 0;
   }
 }
