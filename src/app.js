@@ -1,48 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider, useDispatch } from 'react-redux';
+import { onAuthStateChanged } from 'firebase/auth';
 
-import AppRoutes, { history } from './routes/AppRroute';
-import { firebase } from './firebase/firebase';
+import AppRoutes from './routes/AppRroute';
+import { auth } from './firebase/firebase';
 import { startSetExpense } from './actions/expenses';
 import { login, logout } from './actions/auth';
 import configureStore from './store/configureStore';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-import 'react-dates/lib/css/_datepicker.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import LoaderPage from './components/LoaderPage';
 
 const store = configureStore();
 
-const app = (
-  <Provider store={store}>
-    <AppRoutes />
-  </Provider>
-);
+const AuthGate = () => {
+  const dispatch = useDispatch();
+  const [ready, setReady] = useState(false);
 
-let hasRendered = false;
-const renderApp = () => {
-  if (!hasRendered) {
-    ReactDOM.render(app, document.getElementById('app'));
-    hasRendered = true;
-  }
-};
-
-ReactDOM.render(<LoaderPage />, document.getElementById('app'));
-
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    store.dispatch(login(user.uid));
-    store.dispatch(startSetExpense()).then(() => {
-      renderApp();
-      if (history.location.pathname === '/') {
-        history.push('/dashboard');
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      if (user) {
+        dispatch(login(user.uid));
+        dispatch(startSetExpense()).then(() => setReady(true));
+      } else {
+        dispatch(logout());
+        setReady(true);
       }
     });
-  } else {
-    store.dispatch(logout());
-    renderApp();
-    ReactDOM.render(app, document.getElementById('app'));
-    history.push('/');
-  }
-});
+
+    return unsubscribe;
+  }, [dispatch]);
+
+  return ready ? <AppRoutes /> : <LoaderPage />;
+};
+
+createRoot(document.getElementById('app')).render(
+  <Provider store={store}>
+    <AuthGate />
+  </Provider>
+);

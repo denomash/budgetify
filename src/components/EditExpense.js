@@ -1,61 +1,43 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import ExpenseForm from './ExpenseForm';
 import { startEditExpense, startRemoveExpense } from '../actions/expenses';
 
-export class EditExpense extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  onEditExpense = expense => {
-    this.props.startEditExpense(this.props.expense.id, expense);
-    this.props.history.push('/');
+const EditExpense = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const expense = useSelector(state =>
+    state.expenses.find(item => item.id === id)
+  );
+
+  const onEditExpense = updates => {
+    dispatch(startEditExpense(expense.id, updates));
+    navigate('/');
   };
 
-  onRemoveExpense = () => {
-    this.props.startRemoveExpense({ id: this.props.expense.id });
-    this.props.history.push('/');
+  const onRemoveExpense = () => {
+    dispatch(startRemoveExpense({ id: expense.id }));
+    navigate('/');
   };
 
-  render() {
-    return (
-      <div>
-        <div className="page-header">
-          <div className="content-container">
-            <h1 className="page-header__title">Edit Expense</h1>
-          </div>
-        </div>
-
+  return (
+    <div>
+      <div className="page-header">
         <div className="content-container">
-          <ExpenseForm
-            expense={this.props.expense}
-            onSubmit={this.onEditExpense}
-          />
-          <button className="button--secondary" onClick={this.onRemoveExpense}>
-            Remove Expense
-          </button>
+          <h1 className="page-header__title">Edit Expense</h1>
         </div>
       </div>
-    );
-  }
-}
 
-const mapStateToProps = (state, props) => {
-  return {
-    expense: state.expenses.find(
-      expense => expense.id === props.match.params.id
-    )
-  };
+      <div className="content-container">
+        <ExpenseForm expense={expense} onSubmit={onEditExpense} />
+        <button className="button--secondary" onClick={onRemoveExpense}>
+          Remove Expense
+        </button>
+      </div>
+    </div>
+  );
 };
 
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    startEditExpense: (id, expense) => dispatch(startEditExpense(id, expense)),
-    startRemoveExpense: id => dispatch(startRemoveExpense(id))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditExpense);
+export default EditExpense;

@@ -1,7 +1,10 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const publicPath = path.join(__dirname, '..', 'public');
+const publicPath = path.join(__dirname, '..', 'dist');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static(publicPath));

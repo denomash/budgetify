@@ -1,36 +1,31 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import ExpenseForm from './ExpenseForm';
 import { startAddExpense } from '../actions/expenses';
 
-export class AddExpense extends React.Component {
-  onSubmit = expense => {
-    this.props.startAddExpense(expense);
-    this.props.history.push('/');
+const AddExpense = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onSubmit = expense => {
+    dispatch(startAddExpense(expense));
+    navigate('/');
   };
 
-  render() {
-    return (
-      <div>
-        <div className="page-header">
-          <div className="content-container">
-            <h1 className="page-header__title">Add Expense</h1>
-          </div>
-        </div>
-
+  return (
+    <div>
+      <div className="page-header">
         <div className="content-container">
-          <ExpenseForm onSubmit={this.onSubmit} />
+          <h1 className="page-header__title">Add Expense</h1>
         </div>
       </div>
-    );
-  }
-}
 
-const mapDispatchToProps = dispatch => ({
-  startAddExpense: expense => dispatch(startAddExpense(expense))
-});
+      <div className="content-container">
+        <ExpenseForm onSubmit={onSubmit} />
+      </div>
+    </div>
+  );
+};
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(AddExpense);
+export default AddExpense;

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import moment from 'moment';
-import { SingleDatePicker } from 'react-dates';
+import DatePicker from 'react-datepicker';
 
 export class ExpenseForm extends Component {
   constructor(props) {
@@ -11,21 +11,16 @@ export class ExpenseForm extends Component {
       note: props.expense ? props.expense.note : '',
       amount: props.expense ? (props.expense.amount / 100).toString() : '',
       createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
-      calendarFocused: false,
       error: ''
     };
   }
 
   onDescriptionChange = e => {
-    const description = e.target.value;
-
-    this.setState({ description });
+    this.setState({ description: e.target.value });
   };
 
   onNoteChange = e => {
-    const note = e.target.value;
-
-    this.setState({ note });
+    this.setState({ note: e.target.value });
   };
 
   onAmountChange = e => {
@@ -36,14 +31,10 @@ export class ExpenseForm extends Component {
     }
   };
 
-  onDateChange = createdAt => {
-    if (createdAt) {
-      this.setState({ createdAt });
+  onDateChange = date => {
+    if (date) {
+      this.setState({ createdAt: moment(date) });
     }
-  };
-
-  onFocusChange = ({ focused }) => {
-    this.setState({ calendarFocused: focused });
   };
 
   onSubmit = e => {
@@ -82,13 +73,10 @@ export class ExpenseForm extends Component {
           value={this.state.amount}
           onChange={this.onAmountChange}
         />
-        <SingleDatePicker
-          date={this.state.createdAt}
-          onDateChange={this.onDateChange}
-          focused={this.state.calendarFocused}
-          onFocusChange={this.onFocusChange}
-          numberOfMonths={1}
-          isOutsideRange={() => false}
+        <DatePicker
+          selected={this.state.createdAt.toDate()}
+          onChange={this.onDateChange}
+          dateFormat="MMMM d, yyyy"
         />
 
         <textarea

@@ -1,7 +1,8 @@
 node_modules/
-public/dist
+dist/
 .firebase/
 
 .env.development
 .env.test
-
+.env.local
+.env.*.local
